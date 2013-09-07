@@ -1,0 +1,65 @@
+<table class="table table-bordered table-hover">
+	<tr>
+		          <th>#</th>
+                  <th>Course No</th>
+                  <th>Course Name</th>
+                  <th>Link</th>
+                  <th>PPT</th>
+      </tr>
+
+
+
+ <% @course_arr.each do |row| %>
+ 
+ <% if row.has_ppt == "FULL" %>
+    <% has_ppt = "success" %>
+  <%else %>  
+    <% has_ppt = "not_success" %>
+ <%end %>
+
+<% if @skip_nil == true %>
+    <% if row.course_link == nil %>
+      <% next %>
+    <% end %>
+<% else %>
+    <% if row.course_link != nil %>
+      <% next %>
+    <% end %>
+ <% end %>
+  <tr class=<%= has_ppt%> id=<%=row.course_id%> >
+     
+    <td>  
+    	<% ck_id = 'ck_' + row.course_id.to_s %>
+    	<%= check_box_tag  "course_checkbox[]",row.course_id %>
+      <!--<input type="checkbox" name="myTextEditBox" id = <%= ck_id %> /> -->
+    </td>
+   <td>  <%= row.course_id.to_s  %></td>
+   <td><%= row.name %></td>
+   <% base_link = "http://nptel.iitm.ac.in" %>
+   <% base_link_slash = "http://nptel.iitm.ac.in/" %>
+   <% course_link = row.course_link.to_s %>
+
+
+   <% if course_link[0] == '/' %>
+          <td><%= link_to "link", base_link + course_link %></td>
+
+    <% else %>
+        <td><%= link_to "link", base_link_slash +  course_link %></td>
+    <% end %>
+
+   <td> <%= row.has_ppt %> </td>
+   
+ </tr>
+<%end %>
+</table>
+
+<script type="text/javascript">
+$('tr').click(function () {
+  $(this).attr("class", "well")
+  course_id = $(this).attr("id")
+  ck_id = '#ck_' + course_id
+  //alert(ck_id)
+  $(ck_id).attr("checked",true)
+});
+
+</script>

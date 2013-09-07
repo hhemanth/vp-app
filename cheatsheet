@@ -1,0 +1,21 @@
+#Changing root URL in routes.rb
+ root :to => 'welcome#index'
+#Also delete index.html in Public directory
+
+#Active records queries
+
+#Accessing all records of a database
+
+Course.all.each do |row|
+
+end
+#multiple active record queries
+<% Course.find_all_by_disciplineId_and_course_type(101,"Video").each do |row| %>
+
+#working with partials
+#rendering a partial
+<%= render "course_table" %>
+# and then place _course_table.html.erb in the same directory
+
+# how to create model in rails
+rails generate model Department dept_id:string dept_name:string

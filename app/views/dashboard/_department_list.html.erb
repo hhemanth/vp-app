@@ -1,0 +1,20 @@
+<div class="well">
+<table width="1000" class="table table-condensed"  bg-color="#cbba9f" >
+	<% dept_arr = Department.all %>
+	<% for i in 0..5 %>
+	   <tr class="">
+         <% for j in 0..3 %>
+            <% cur_dept_id = dept_arr[i*4+j].dept_id%>
+            <% dept_link = "/dashboard/by_dept/" + cur_dept_id %>
+            <% if cur_dept_id == @url_dept_id %>
+               <% style_str = "background-color:#E0E0E0;" %>
+            <% else %>
+               <% style_str = "background-color:none;" %>
+            <% end %>
+
+            <td class="" style= <%= style_str %> > <%= link_to  dept_arr[i*4+j].dept_name, dept_link %> </td>
+         <% end %>
+        </tr> 
+   <%end %>
+</table>
+</div>

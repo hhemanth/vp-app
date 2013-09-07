@@ -1,0 +1,42 @@
+<body>
+<div class="container">
+<h1>Course List</h1>
+<div class="well">
+  Total Videos
+</div>
+	<div class="row">
+		
+      <%= render "department_list" %>
+   
+		
+  <div class="span7">
+
+	<%= form_tag("dashboard/change_course_status", :method => "post") do %>
+	<%= select_tag "ppt_options", "<option>Has PPT</option><option>Has NO PPT</option><option>Has Partial PPT</option>".html_safe  %>
+        <%= submit_tag("Has PPT", :class=>"btn btn-primary") %>
+        <br>
+        <br>
+        <ul id="coursesTab" class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab">Completed </a></li>
+          <li class=""><a href="#profile" data-toggle="tab">Under Development</a></li>
+         </ul>
+
+         <div id="coursesTabContent" class="tab-content">
+              <div class="tab-pane fade in active" id="home">
+              	<% @skip_nil = true %>
+                 <%= render "course_table" %>
+              </div>
+              <div class="tab-pane fade" id="profile">
+              	<% @skip_nil = false %>
+                 <%= render "course_table" %>
+              </div>  
+          </div>
+    <%end %>
+   
+        </div> <!-- span 8 -->
+            <div class="span5">
+              <%= render "dept_stats_table" %>
+        </div> 
+     </div><!-- row -->
+    </div><!-- container -->
+</body>
